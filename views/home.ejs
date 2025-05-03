@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css">
+
+    <title>DailyScribe</title>
+    <script>
+        function goToNewPostPage() {
+            window.location.href = '/posts/new';
+        }
+        function goToPostPage(postId) {
+            window.location.href = `/posts/${postId}`;
+        }
+    </script>
+    <style>
+        #homepage{
+            height: 80%;
+            overflow-y:scroll;
+            overflow-x: hidden;
+        }
+        #postList {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 50%;
+            height: 80%;
+        }
+
+        #postList .postCon {
+            width:100%;
+            height: 20%;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            height: 4.8em; /* approx 4 lines at 1.2em each */
+            cursor: pointer;
+        }
+        #postList .postCon:hover{
+            border: 1px solid grey;
+            background-color: gainsboro;
+        }
+       
+           
+    </style>
+</head>
+
+<body>
+
+    <%- include('./partials/header') %>
+        <div id="homepage">
+            <h1>Hello <%= locals.userName %></h1>
+            <div id="postList">
+                <% locals.posts.forEach(post=> { %>
+                    <div class="postCon" onclick="goToPostPage('<%= post.id %>')">
+                        <strong> <%= post.title %>, </strong>
+                        <span><%= post.userName %></span>
+                        <div class="content"> <%= post.content %> </div>
+                    </div>
+                    <% }); %>
+            </div>
+            <button onclick="goToNewPostPage()">Write a post</button>
+        </div>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css">
+    <title>DailyScribe</title>
+</head>
+<body>
+    <%- include('./partials/header') %>
+    <form action="/posts/new" method="POST">
+        <label>Write your title</label>
+        <input type="text" name="title" value="<%= locals.content%>"/>
+        <label>Write your post</label>
+        <input type="text" name="content" value="<%= locals.content%>"/>
+        <br/><br/>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
