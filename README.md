@@ -59,7 +59,7 @@ DailyScribe is actively being developed.
 
 ###  Clone the repo
 ```bash
-git clone https://github.com/yourusername/dailyscribe.git
+git clone https://github.com/ayeletganot/DailyScribe.git
 cd dailyscribe
 
 ###Install dependencies:
