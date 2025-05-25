@@ -1,22 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DailyScribe</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/styles/main.css">
+
+    <script src="/js/comments.js" defer></script>
+
+    <title>DailyScribe - <%= post.title.substring(5) %><% post.title.length > 5 ? "..." : "" %></title>
 </head>
+
 <body>
-    <%- include('./partials/header') %>
-    <div>
-        <h1><%= currPost.title %>, <%= currPost.userName %></h1>
-        <div><%= currPost.content %></div>
-        <div id="CommentList">
-            <% currPost.comments.forEach(comment=> { %>
-                <div class="commentCon">
-                    <strong><%= comment.userName%></strong>
-                    <div><%= comment.content %></div>
+    <div class="d-flex flex-column w-100 h-100">
+
+        <% if(typeof error !== 'undefined'){ %>
+            <%- include('./partials/errorMsg') %>
+        <% } %>
+        <% if(typeof success !== 'undefined'){ %>
+            <%- include('./partials/successMsg') %>
+        <% } %>
+
+        <%- include('./partials/header') %>
+            <main class="container h-80 overflow-auto">
+                <!-- Post View -->
+                <div class="row my-2">
+                    <div class="col-md-10 mx-auto">
+
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="d-flex flex-row justify-content-between">
+                                    <h1 class="card-title">
+                                        <%= post.title %>
+                                    </h1>
+
+                                    <% if (user && user.id === post.authorId) { %>
+                                        <div class="d-flex gap-2">
+                                            <button class="btn btn-primary" disabled>Edit Post</button>
+                                            <form action="/posts/<%= post.id %>?_method=DELETE" method="POST">
+                                                <button type="submit" class="btn btn-danger">Delete Post</button>
+                                            </form>
+                                        </div>
+                                    <% } %>
+                                </div>
+
+                                <p class="card-text">
+                                    <%= post.author?.userName %>
+                                </p>
+                                <p class="card-text">
+                                    <%= new Date(post.createdAt).toLocaleDateString() %>
+                                </p>
+                                <p class="card-text">
+                                    <%= post.content %>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            <% }); %>
+                <!-- Comments Section -->
+                <div class="row my-2">
+                    <div class="col-md-10 mx-auto">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">Comments</h2>
+                                <form action="/posts/<%= post.id %>/comment/new" method="POST">
+                                    <div class="mb-3">
+                                        <label for="addComment" class="form-label">Add a comment</label>
+                                        <textarea name="content" id="addComment" class="form-control" rows="3"></textarea>
+                                        <button type="submit" class="btn btn-primary" id="submitComment" disabled>Add Comment</button>
+                                    </div>
+                                   
+                                </form>
+                                <%- include('./partials/comment/commentsList', { post }) %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <%- include('partials/footer') %>
     </div>
+
+    
 </body>
+
 </html>

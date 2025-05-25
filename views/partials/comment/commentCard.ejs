@@ -1,0 +1,66 @@
+<div class="card h-100">
+    <div class="card-body d-flex flex-column">
+        <small class="card-text">
+            <%= comment.author?.userName %>, <%= new Date(comment.createdAt).toLocaleDateString() %>
+        </small>
+        <p class="card-text">
+            <%= comment.content.substring(0, 100) %> <%= comment.content.length > 100 ? '...' : '' %>
+        </p>
+        <small class="card-text flex-grow-1">
+            On post: <a href="/posts/<%= comment.post.id %>">
+                <%= comment.post.title %>
+            </a>
+        </small>
+
+        <% if (locals.user?.id && locals.user.id === comment.authorId) { %>
+            <div class="mt-2 d-flex gap-2">
+                <button class="btn btn-primary" disabled>Edit</button>
+                <form action="/posts/<%= comment.post.id %>/comment/<%= comment.id %>?_method=DELETE" method="POST">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        <% } %>
+    </div>
+</div>
+
+<!-- Edit Comment Modal -->
+<div class="modal fade" id="editCommentModal" tabindex="-1" aria-labelledby="editCommentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editCommentModalLabel">Edit Comment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="editCommentForm" method="POST">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="editCommentContent" class="form-label">Comment</label>
+                        <textarea class="form-control" id="editCommentContent" name="content" rows="3" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const editCommentModal = document.getElementById('editCommentModal');
+    const editCommentForm = document.getElementById('editCommentForm');
+    const editCommentContent = document.getElementById('editCommentContent');
+
+    editCommentModal.addEventListener('show.bs.modal', function(event) {
+        const button = event.relatedTarget;
+        const commentId = button.getAttribute('data-comment-id');
+        const postId = button.getAttribute('data-post-id');
+        const content = button.getAttribute('data-content');
+
+        editCommentContent.value = content;
+        editCommentForm.action = `/posts/${postId}/comment/${commentId}?_method=PUT`;
+    });
+});
+</script>
