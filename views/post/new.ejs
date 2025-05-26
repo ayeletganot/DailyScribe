@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <h1 class="display-4 mb-4">Add New Post</h1>
+        <form action="/posts/new" method="POST">
+
+            <div class="mb-3">
+                <label for="title" class="form-label">Write your title</label>
+                <input type="text" class="form-control" id="title" name="title" required />
+            </div>
+
+            <div class="mb-3">
+                <label for="content" class="form-label">Write your post</label>
+                <textarea id="content" name="content" rows="5" cols="33" class="form-control" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>

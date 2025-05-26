@@ -53,7 +53,7 @@ exports.getPostPage = async (req, res) => {
         if (!currPost)
             return res.render("notFound")
 
-        res.render("post", { post: currPost })
+        res.render("./post/index", { post: currPost })
 
     } catch (error) {
         console.error("Error fetching post", error)
@@ -72,7 +72,7 @@ exports.createPost = async (req, res) => {
             authorId: user.id
         }
         await prisma.post.create({ data: newPost })
-        res.redirect("/home")
+        res.redirect("../home")
 
     } catch (error) {
         console.error("Error creating post", error)
@@ -130,7 +130,7 @@ exports.deletePost = async (req, res) => {
         await prisma.post.delete({
             where: { id: postId }
         });
-        res.redirect("/home");
+        res.redirect("home");
 
     } catch (error) {
         console.error("Error deleteing post", error)
@@ -164,40 +164,7 @@ exports.deleteComment = async (req, res) => {
     }
 };
 
-exports.editComment = async (req, res) => {
-    try {
-        const { commentId } = req.params;
-        const { content } = req.body;
-        const { user } = req.session;
 
-        const comment = await prisma.comment.findUnique({
-            where: { id: commentId }
-        });
-
-        if (!comment || comment.authorId !== user.id) {
-            return res.render("error", {error: "Not authorized to edit this comment" , status:403 })
-        }
-
-        const updatedComment = await prisma.comment.update({
-            where: { id: commentId },
-            data: { content },
-            include: {
-                author: {
-                    select: {
-                        userName: true,
-                        id: true
-                    }
-                }
-            }
-        });
-
-        res.redirect(`/posts/${comment.postId}`)
-
-    } catch (error) {
-        console.error("Error editing comment", error)
-        res.status(500).render("error", { error: "Failed to edit comment" })
-    }
-};
 
 
 

@@ -11,8 +11,7 @@
         </p>
         <div class="d-flex gap-2">
             <a href="/posts/<%= post.id %>" class="btn btn-primary">Read More</a>
-            <% if (locals.user?.id && locals.user.id === post.authorId) { %>
-                <button class="btn btn-warning" disabled>Edit</button>
+            <% if (user?.id && user.id === post.authorId) { %>
                 <form action="/posts/<%= post.id %>?_method=DELETE" method="POST">
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>

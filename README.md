@@ -40,7 +40,6 @@ DailyScribe is actively being developed.
 ✅ Main functionality works well  
 🛠 Some features are still under construction:
 
-- Edit buttons for posts/comments are currently disabled (feature not yet connected)
 - Minor bugs in edge cases still need refinement
 - UI and validation will be improved over time
 

@@ -5,7 +5,7 @@ const {requireAuth} = require("../controllers/authController")
 
 // Renders the Form to write new post.
 router.get("/new",requireAuth,(req,res)=>{
-    res.render("addPost")
+    res.render("./post/new")
 })
 
 //Gets post data from the Form and adds the post.
@@ -22,9 +22,5 @@ router.delete("/:id", requireAuth, deletePost)
 
 // Delete a comment
 router.delete("/:postId/comment/:commentId", requireAuth, deleteComment)
-
-// Edit a comment
-router.put("/:postId/comment/:commentId", requireAuth, editComment)
-
 
 module.exports = router

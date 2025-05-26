@@ -37,7 +37,7 @@ exports.login = async(req,res)=>{
             userName: user.userName
         };
         
-        res.redirect("/home")
+        res.redirect("home")
 
     } catch (error) {
         console.error("Error logging in", error)

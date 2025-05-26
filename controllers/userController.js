@@ -69,7 +69,7 @@ exports.getUserComments = async (req, res) => {
             }
         });
 
-        res.render('userComments', { comments });
+        res.render('./comment/userComments', { comments });
     } catch (error) {
         console.error('Error fetching user comments:', error);
         res.status(500).render('error', { error: 'Failed to fetch comments' });
@@ -194,7 +194,7 @@ exports.getUserPosts = async (req, res) => {
                 comments: true
             }
         });
-        res.render('userPosts', { posts });
+        res.render('./post/userPosts', { posts });
 
     } catch (error) {
         console.error('Error fetching user posts:', error);
