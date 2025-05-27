@@ -2,7 +2,7 @@ const express = require('express')
 const expressLayouts = require('express-ejs-layouts');
 const session = require('express-session')
 const methodOverride = require('method-override');
-
+const prisma = require('./prisma/client')
 
 const app = express()
 const port = process.env.port || 3000
@@ -16,7 +16,7 @@ app.use(expressLayouts);
 app.set('layout', 'layout/main'); // Path to your main layout inside "views"
 
 //A middleware that allows us to parse the body of the request
-app.use(express.urlencoded({extended:true}))
+app.use(express.urlencoded({ extended: true }))
 //A middleware that allows us to use PUT and DELETE methods
 app.use(methodOverride('_method'))
 //A middleware that allows us to use static files
@@ -41,10 +41,21 @@ app.use((req, res, next) => {
 app.set('view engine', 'ejs')
 
 //A middleware that uses the authRouter
-app.use("/",authRouter)
+app.use("/", authRouter)
 //A middleware that uses the usersRouter
-app.use("/users",usersRouter)
+app.use("/users", usersRouter)
 //A middleware that uses the postsRouter
-app.use("/posts",postsRouter)
+app.use("/posts", postsRouter)
 
 app.listen(port)
+
+// Graceful shutdown of the server
+process.on('SIGINT', async () => {
+    await prisma.$disconnect();
+    process.exit(0);
+});
+
+process.on('SIGTERM', async () => {
+    await prisma.$disconnect();
+    process.exit(0);
+});

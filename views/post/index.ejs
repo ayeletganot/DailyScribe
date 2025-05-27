@@ -10,7 +10,7 @@
                         <%= post.title %>
                     </h1>
 
-                    <% if (user && user.id===post.authorId) { %>
+                    <% if (user && user.id === post.authorId) { %>
                         <div class="d-flex gap-2">
                             <form action="/posts/<%= post.id %>?_method=DELETE" method="POST">
                                 <button type="submit" class="btn btn-danger">Delete Post</button>

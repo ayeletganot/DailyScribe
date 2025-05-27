@@ -6,9 +6,10 @@
                 <a class="navbar-brand" href="/home">DailyScribe</a>
             </strong>
 
-            <div class="col-md-6">
-                <ul class="navbar-nav d-flex flex-row justify-content-end gap-3">
-                    <li class="nav-item">
+            <% if(user){ %>
+                <div class="col-md-6">
+                    <ul class="navbar-nav d-flex flex-row justify-content-end gap-3">
+                        <li class="nav-item">
                         <a class="nav-link" href="/home">Home</a>
                     </li>
                     <li class="nav-item">
@@ -22,7 +23,7 @@
                     </li>
                 </ul>
             </div>
-
+            <% } %>
         </div>
     </div>
 </nav>

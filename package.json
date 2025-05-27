@@ -1,13 +1,16 @@
 {
   "name": "dailyscribe",
   "version": "1.0.0",
-  "description": "",
+  "description": "A blog platform built with Node.js, Express, and Prisma",
   "license": "ISC",
   "author": "Ayelet Ganot",
   "type": "commonjs",
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   },
   "dependencies": {
     "@prisma/client": "^6.7.0",

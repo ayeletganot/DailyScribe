@@ -25,6 +25,12 @@ router.get("/logout",logout)
 // Show homepage with user's name
 router.get("/home", requireAuth , getAllPosts)
 
+router.get("/about",(req,res) =>{
+    res.render("./about")
+})
 
+router.get("/contact",(req,res) =>{
+    res.render("./contact")
+})
 
 module.exports = router
