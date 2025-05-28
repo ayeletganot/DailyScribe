@@ -2,32 +2,42 @@
 
 DailyScribe is a full-stack blog platform built with Node.js, Express, and Prisma. It allows users to create posts, comment on posts, and manage their content.
 
-## Features
+## 🚀 Features
 
 - User authentication (signup/login with email)
 - Create, read, and delete blog posts
 - Comment on posts
 - User profiles with recent posts and comments
 - Responsive design using Bootstrap
+- Secure password hashing with bcrypt
+- Easy to customize and extend
 
-## Tech Stack
+## 🛠 Tech Stack
 
 - **Backend**: Node.js, Express
 - **Database**: PostgreSQL with Prisma ORM
-- **Frontend**: EJS templates, Bootstrap 5
+- **Frontend**: EJS templates, Bootstrap 
 - **Authentication**: Session-based with bcrypt password hashing
 
-## Prerequisites
+## 💡 About Development with Cursor AI
+Most of the development was manual, with some enhancements supported by Cursor AI. 
+It assisted in:
 
-- Node.js (v14 or higher)
+- Debugging specific issues
+- Speeding up boilerplate generation
+- Suggesting improvements to code readability
+
+## ✅ Prerequisites
+
+- Node.js
 - PostgreSQL database
-- npm or yarn package manager
+- npm
 
-## Installation
+## ⚙️ Installation
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/DailyScribe.git
+git clone https://github.com/ayeletganot/DailyScribe.git
 cd DailyScribe
 ```
 
@@ -36,8 +46,7 @@ cd DailyScribe
 npm install
 ```
 
-3. Set up environment variables:
-Create a `.env` file in the root directory with the following:
+3. Create a `.env` file in the root directory with the following:
 ```
 DATABASE_URL="postgresql://username:password@localhost:5432/dailyscribe"
 SESSION_SECRET="your-secret-key"
@@ -46,7 +55,7 @@ SESSION_SECRET="your-secret-key"
 4. Set up the database:
 ```bash
 npx prisma migrate dev
-npx prisma db seed
+npx prisma db seed    ##For seeding the database, scroll down to the "Seed Data" section.
 ```
 
 5. Start the server:
@@ -94,7 +103,7 @@ model Comment {
 }
 ```
 
-## Code Structure
+## 📁 Project Structure
 
 ```
 DailyScribe/
@@ -108,29 +117,29 @@ DailyScribe/
 │   └── seed.js
 ├── public/             # Static files
 │   ├── styles/
-│   └── js/
 ├── routes/             # Route definitions
 ├── views/              # EJS templates
 │   ├── auth/
+│   ├── comment/
+│   ├── layout/
 │   ├── partials/
+│   ├── post/
 │   └── *.ejs
 ├── app.js             # Express app configuration
 └── package.json
 ```
 
-## Authentication Flow
+## 🔐 Authentication Flow
 
 1. **Signup**:
-   - User provides email, username, and password
-   - Email uniqueness is checked
-   - Password is hashed using bcrypt
-   - User is created and session is initialized
+   - A user provides an email, username, and password
+   - Password is hashed and stored
+   - A session is created after signup
 
 2. **Login**:
-   - User provides email and password
-   - Email is used to find the user
-   - Password is verified using bcrypt
-   - Session is created with user data
+   - The user submits his email and password
+   - Credentials are verified using bcrypt
+   - If valid, a session is created for the user
 
 3. **Protected Routes**:
    - Middleware checks for valid session
@@ -138,7 +147,7 @@ DailyScribe/
 
 ## Views and Templates
 
-### Main Views
+## 🖼️ Main Views
 - `home.ejs`: Homepage with recent posts
 - `post.ejs`: Individual post view with comments
 - `profile.ejs`: User profile with posts and comments
@@ -155,19 +164,19 @@ DailyScribe/
 - `errorMsg.ejs`: Error message display
 - `successMsg.ejs`: Success message display
 
-## Seed Data
+## 🌱 Seed Data
 
-The project includes seed data for testing:
-- Two test users (john@example.com and jane@example.com)
-- Sample posts and comments
-- Password for test users: "password123"
+Includes test data for development:
+- 2 test users: john@example.com, jane@example.com
+- Posts and comments
+- Password: password123
 
-To run the seed:
+Run seed with:
 ```bash
 npx prisma db seed
 ```
 
-## Contributing
+## 🤝 Contributing
 
 1. Fork the repository
 2. Create your feature branch
@@ -175,6 +184,6 @@ npx prisma db seed
 4. Push to the branch
 5. Create a Pull Request
 
-## License
+## 📄 License
 
 This project is licensed under the MIT License.

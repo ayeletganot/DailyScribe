@@ -1,3 +1,4 @@
+<!-- Comments list partial for post page -->
 <ul class="list-group">
     <% post.comments.forEach(comment=> { %>
         <li class="list-group-item">
@@ -8,6 +9,7 @@
                 <%= comment.content %>
             </p>
 
+            <!-- If user is the author of the comment, show delete button -->
             <% if (user?.id && user.id === comment.authorId) { %>
                 <div class="mt-2 d-flex gap-2">
                     <form action="/posts/<%= comment.post.id %>/comment/<%= comment.id %>?_method=DELETE" method="POST">

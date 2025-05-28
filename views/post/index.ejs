@@ -1,4 +1,4 @@
-<!-- Post View -->
+<!-- Post View body -->
 <div class="row my-2">
     <div class="col-md-10 mx-auto">
 
@@ -10,6 +10,7 @@
                         <%= post.title %>
                     </h1>
 
+                    <!-- If user is the author of the post, show delete button -->
                     <% if (user && user.id === post.authorId) { %>
                         <div class="d-flex gap-2">
                             <form action="/posts/<%= post.id %>?_method=DELETE" method="POST">
@@ -40,6 +41,7 @@
         <div class="card">
             <div class="card-body">
                 <h2 class="card-title">Comments</h2>
+                <!-- Add comment form -->
                 <form action="/posts/<%= post.id %>/comment/new" method="POST">
                     <div class="mb-3">
                         <label for="addComment" class="form-label">Add a comment</label>
@@ -48,6 +50,7 @@
                     </div>
 
                 </form>
+                <!-- Show comments list -->
                 <%- include('./commentsList', { post }) %>
             </div>
         </div>
@@ -60,9 +63,9 @@
 
         const textarea = document.getElementById('addComment');
         const button = document.getElementById('submitComment');
-        console.log(textarea)
+
+        // Disable button if textarea is empty
         textarea.addEventListener('input', () => {
-            console.log(textarea.value)
             button.disabled = textarea.value.trim() === '';
         });
 

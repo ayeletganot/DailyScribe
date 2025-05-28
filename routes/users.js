@@ -3,16 +3,16 @@ const router = express.Router()
 const { requireAuth } = require("../controllers/authController")
 const { getProfile, getUserComments, updateProfile, getUserPosts } = require("../controllers/userController")
 
-// Get user profile
+// Gets user profile
 router.get("/profile", requireAuth, getProfile)
 
-// Get user comments history
+// Gets user comments history
 router.get("/comments", requireAuth, getUserComments)
 
-// Update user profile
+// Updates user profile
 router.put("/profile", requireAuth, updateProfile)
 
-// User posts routes
+// Gets user posts
 router.get("/posts", requireAuth, getUserPosts)
 
 module.exports = router

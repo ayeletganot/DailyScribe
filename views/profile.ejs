@@ -1,3 +1,5 @@
+<!-- Profile page body -->
+
 <!-- Edit settings section -->
 <div class="row my-2">
     <div class="col-md-10 mx-auto">
@@ -6,6 +8,8 @@
                 <h2 class="mb-0">Profile Settings</h2>
             </div>
             <div class="card-body">
+
+                <!-- Edit settings form -->
                 <form action="/users/profile?_method=PUT" method="POST">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
@@ -43,6 +47,7 @@
             <% if (userProfile.posts.length> 0) { %>
                 <div class="card-body">
                     <div class="row my-2">
+                        <!-- User posts -->
                         <% userProfile.posts.forEach(post=> { %>
                             <div class="col-md-4 my-4">
                                 <%- include('./partials/shared/postCard', { post }) %>
@@ -78,6 +83,7 @@
 
                 <div class="card-body">
                     <div class="row my-2">
+                        <!-- User comments -->
                         <% userProfile.comments.forEach(comment=> { %>
                             <div class="col-md-4 my-4">
                                 <%- include('./partials/shared/commentCard', { comment}) %>

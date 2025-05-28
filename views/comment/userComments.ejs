@@ -1,11 +1,15 @@
+<!-- User comments page body-->
 <div class="h-100 d-flex flex-column justify-content-center">
     <% if (comments.length> 0) { %>
 
+        <!-- User comments card -->
         <div class="card h-80">
             <div class="card-header">
                 <h3 class="mb-0">My Comments</h3>
             </div>
             <div class="card-body overflow-auto">
+
+                <!-- User comments -->
                 <div class="row my-2">
                     <% comments.forEach(comment=> { %>
                         <div class="col-md-4 my-4">

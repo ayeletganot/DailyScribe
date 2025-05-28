@@ -1,3 +1,5 @@
+<!-- User posts page body -->
+
 <div class="h-100 d-flex flex-column justify-content-center">
 
     <% if (posts.length> 0) { %>
@@ -8,6 +10,7 @@
             </div>
             <div class="card-body overflow-auto">
                 <div class="row my-2">
+                    <!-- User posts -->
                     <% posts.forEach(post=> { %>
                         <div class="col-md-4 my-4">
                             <%- include('../partials/shared/postCard', { post }) %>

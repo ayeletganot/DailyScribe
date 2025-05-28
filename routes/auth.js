@@ -1,34 +1,42 @@
 const express = require("express")
 const router = express.Router()
-const prisma = require("../prisma/client")
 const { login, signup, logout } = require("../controllers/authController")
 const { requireAuth } = require("../controllers/authController")
 const { getAllPosts } = require("../controllers/postController")
 
+// Shows welcome page
 router.get('/' , (req, res) => {
     return res.render("welcome")
 })
 
+// Shows login page
 router.get("/login",(req,res) =>{
     res.render("./auth/login")
 })
 
-router.post("/login", login)
-
+// Shows signup page
 router.get("/signUp",(req,res) =>{
     res.render("./auth/signup")
 })
 
+// Logs in user
+router.post("/login", login)
+
+// Signs up user
 router.post("/signUp",signup)
+
+// Logs out user
 router.get("/logout",logout)
 
-// Show homepage with user's name
+// Shows homepage with user's name
 router.get("/home", requireAuth , getAllPosts)
 
+// Shows about page
 router.get("/about",(req,res) =>{
     res.render("./about")
 })
 
+// Shows contact page
 router.get("/contact",(req,res) =>{
     res.render("./contact")
 })
